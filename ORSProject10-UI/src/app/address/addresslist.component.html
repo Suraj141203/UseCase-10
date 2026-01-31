@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+
+<style>
+  #nnn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .content-wrapper {
+    background: url('assets/files/teahu.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 105vh;
+    padding: 20px;
+  }
+</style>
+
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="panel panel-primary" style="padding-top: 12%;">
+
+      <div class="panel-heading">
+        <h1 class="text-primary font-weight-bold">
+          {{ 'Address List' | translate }}
+        </h1>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="row search-inputs p-1 justify-content-center">
+
+        <div class="col-sm-2">
+          <input type="text" class="form-control" [(ngModel)]="form.searchParams.personName" placeholder="Person Name">
+        </div>
+
+        <div class="col-sm-2">
+          <input type="text" class="form-control" [(ngModel)]="form.searchParams.city" placeholder="City">
+        </div>
+
+        <div class="col-sm-2">
+          <select class="form-control" [(ngModel)]="form.searchParams.state">
+            <option [ngValue]="undefined">Select State</option>
+            <option value="MP">MP</option>
+            <option value="UP">UP</option>
+            <option value="MH">MH</option>
+            <option value="RJ">RJ</option>
+          </select>
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="submit()" class="btn btn-primary w-100">
+            {{ 'Search' | translate }}
+          </button>
+        </div>
+
+        <div>
+          <button (click)="forward('/address')" class="btn btn-success w-100">
+            {{ 'Add Address' | translate }}
+          </button>
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="deleteMany()" class="btn btn-danger w-100">
+            {{ 'Delete' | translate }}
+          </button>
+        </div>
+
+      </div>
+
+        <!-- ================= MESSAGE ================= -->
+      <div *ngIf="form.error" class="alert alert-danger alert-dismissible">
+        {{ form.message }}
+      </div>
+
+      <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible">
+        {{ form.message }}
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-dark">
+          <thead>
+            <tr align="center">
+              <th><input type="checkbox" [(ngModel)]="isMasterSel" name="list_name" (change)="checkUncheckAll($event)">
+              </th>
+              <th>S.No</th>
+              <th>Person Name</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Pincode</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let a of form.list; let i=index" align="center">
+              <td>
+                <input type="checkbox" #checkboxes name="list_name" [id]="a.id" (change)="checklistUpdate()">
+              </td>
+              <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+              <td>{{ a.personName }}</td>
+              <td>{{ a.city }}</td>
+              <td>{{ a.state }}</td>
+              <td>{{ a.pincode }}</td>
+              <td>
+                <button id="nnn" class="fa fa-edit text-primary" (click)="forward('/address/' + a.id)">
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+       <!-- ================= PAGINATION ================= -->
+        <div class="d-flex justify-content-between mt-3">
+          <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info">
+            {{ 'Previous' | translate }}
+          </button>
+
+          <a class="btn btn-warning mr-1" [routerLink]="['/reportlist']" (click)="exit()">
+            {{ 'Reset' | translate }}
+          </a>
+
+          <button (click)="next()" [disabled]="nextList == 0" class="btn btn-info">
+            {{ 'Next' | translate }}
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top: 12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="addressForm">
+
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold text-center">
+              {{ 'Add Address' | translate }}
+            </h2>
+
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold text-center">
+              {{ 'Update Address' | translate }}
+            </h2>
+
+            <!-- messages -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger">
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success">
+              {{ form.message }}
+            </div>
+
+            <!-- Person Name -->
+            <div class="form-group pt-2">
+              <label><b>Person Name</b><span class="required-field">*</span></label>
+              <input type="text" class="form-control" name="personName" [(ngModel)]="form.data.personName"
+                placeholder="Enter Person Name" (keypress)="allowOnlyAlphabets($event)">
+              <span *ngIf="form.inputerror?.personName" class="alertRedColor">
+                {{ form.inputerror.personName }}
+              </span>
+            </div>
+
+            <!-- City -->
+            <div class="form-group pt-2">
+              <label><b>City</b><span class="required-field">*</span></label>
+              <input type="text" class="form-control" name="city" [(ngModel)]="form.data.city" placeholder="Enter City" (keypress)="allowOnlyAlphabets($event)">
+              <span *ngIf="form.inputerror?.city" class="alertRedColor">
+                {{ form.inputerror.city }}
+              </span>
+            </div>
+
+            <!-- State (STATIC PRELOAD ON FRONTEND) -->
+            <div class="form-group pt-2">
+              <label><b>State</b><span class="required-field">*</span></label>
+              <select class="form-control" name="state" [(ngModel)]="form.data.state">
+                <option [ngValue]="undefined">----Select State----</option>
+                <option value="MP">MP</option>
+                <option value="UP">UP</option>
+                <option value="MH">MH</option>
+                <option value="RJ">RJ</option>
+              </select>
+              <span *ngIf="form.inputerror?.state" class="alertRedColor">
+                {{ form.inputerror.state }}
+              </span>
+            </div>
+
+            <!-- Pincode -->
+            <div class="form-group pt-2">
+              <label><b>Pincode</b><span class="required-field">*</span></label>
+              <input type="number" class="form-control" name="pincode" [(ngModel)]="form.data.pincode"
+                placeholder="Enter Pincode">
+              <span *ngIf="form.inputerror?.pincode" class="alertRedColor">
+                {{ form.inputerror.pincode }}
+              </span>
+            </div>
+
+            <!-- buttons -->
+            <div class="row pt-2 pb-3 justify-content-center">
+              <button *ngIf="!form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                {{ 'Save' | translate }}
+              </button>
+
+              <button *ngIf="form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                {{ 'Update' | translate }}
+              </button>
+
+              <a class="btn btn-warning" [routerLink]="['/addresslist']" style="color:white">
+                {{ 'List' | translate }}
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
