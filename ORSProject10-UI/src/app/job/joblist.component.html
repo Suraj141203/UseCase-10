@@ -1,0 +1,149 @@
+<app-navbar></app-navbar>
+
+<style>
+  #nnn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .panel-heading {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-wrapper {
+    background: url('assets/files/teahu.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 105vh;
+    padding: 20px;
+  }
+</style>
+
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <div class="panel panel-primary" style="padding-top: 12%;">
+
+      <!-- HEADER -->
+      <div class="panel-heading">
+        <h1 class="text-primary font-weight-bold">
+          {{ 'Job List' | translate }}
+        </h1>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="row search-inputs p-1 justify-content-center align-items-center">
+
+        <div class="col-sm-2 font-weight-bold text-right">
+          Job Title :-
+        </div>
+
+        <div class="col-sm-2">
+          <input type="text" class="form-control" [(ngModel)]="form.searchParams.jobTitle"
+            placeholder="Enter Job Title" (keypress)="allowOnlyAlphabets($event)">
+        </div>
+
+        <div class="col-sm-2 font-weight-bold text-right">
+          Experience :-
+        </div>
+
+        <div class="col-sm-2">
+          <select class="form-control" [(ngModel)]="form.searchParams.experience">
+            <option [ngValue]="undefined">Select Experience</option>
+            <option value="0-1">0-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-3">2-3</option>
+            <option value="3-5">3-5</option>
+            <option value="5-7">5-7</option>
+            <option value="7-10">7-10</option>
+          </select>
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="searched=true; submit()" class="btn btn-primary w-100">
+            {{ 'Search' | translate }}
+          </button>
+        </div>
+
+        <div>
+          <button (click)="forward('/job')" class="btn btn-success w-100">
+            {{ 'Add Job' | translate }}
+          </button>
+        </div>
+
+        <div class="col-sm-1">
+          <button (click)="deleteMany()" class="btn btn-danger w-100">
+            {{ 'Delete' | translate }}
+          </button>
+        </div>
+
+      </div>
+
+      <!-- MESSAGE -->
+      <div *ngIf="searched && form.error" class="alert alert-danger alert-dismissible">
+        {{ form.message }}
+      </div>
+
+      <div *ngIf="searched && !form.error && form.message" class="alert alert-success alert-dismissible">
+        {{ form.message }}
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-dark">
+          <thead>
+            <tr align="center">
+              <th>
+                <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)">
+              </th>
+              <th>S.No</th>
+              <th>Job Title</th>
+              <th>Joining Date</th>
+              <th>Experience</th>
+              <th>Department</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let j of form.list; let i=index" align="center">
+              <td>
+                <input type="checkbox" #checkboxes [id]="j.id" (change)="checklistUpdate()">
+              </td>
+              <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+              <td>{{ j.jobTitle }}</td>
+              <td>{{ j.joiningDate | date:'yyyy-MM-dd' }}</td>
+              <td>{{ j.experience }}</td>
+              <td>{{ j.department }}</td>
+              <td>
+                <button id="nnn" class="fa fa-edit text-primary" (click)="forward('/job/' + j.id)">
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAGINATION -->
+      <div class="d-flex justify-content-between mt-3">
+        <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info">
+          {{ 'Previous' | translate }}
+        </button>
+
+        <a class="btn btn-warning mr-1" [routerLink]="['/joblist']" (click)="exit()">
+          {{ 'Reset' | translate }}
+        </a>
+
+        <button (click)="next()" [disabled]="nextList == 0" class="btn btn-info">
+          {{ 'Next' | translate }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

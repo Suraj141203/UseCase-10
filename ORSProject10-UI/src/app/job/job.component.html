@@ -1,0 +1,125 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top: 12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="jobForm">
+
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold text-center">
+              {{ 'Add Job' | translate }}
+            </h2>
+
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold text-center">
+              {{ 'Update Job' | translate }}
+            </h2>
+
+            <!-- Messages -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger">
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success">
+              {{ form.message }}
+            </div>
+
+            <!-- Job Title -->
+            <div class="form-group pt-2">
+              <label><b>Job Title</b> <span class="required-field">*</span></label>
+              <input type="text" class="form-control" name="jobTitle" [(ngModel)]="form.data.jobTitle"
+                placeholder="{{ 'Enter Job Title' | translate }}" (keypress)="allowOnlyAlphabets($event)">
+              <span *ngIf="form.inputerror?.jobTitle" class="alertRedColor">
+                {{ form.inputerror.jobTitle }}
+              </span>
+            </div>
+
+            <!-- Joining Date -->
+            <div class="form-group pt-2">
+              <label><b>Joining Date</b> <span class="required-field">*</span></label>
+              <input type="date" class="form-control" [value]="form.data.joiningDate | date:'yyyy-MM-dd'"
+                (input)="form.data.joiningDate=parseDate($event.target.value)">
+              <span *ngIf="form.inputerror?.joiningDate" class="alertRedColor">
+                {{ form.inputerror.joiningDate }}
+              </span>
+            </div>
+
+            <!-- Experience -->
+            <div class="form-group pt-2">
+              <label><b>Experience</b> <span class="required-field">*</span></label>
+              <select class="form-control" name="experience" [(ngModel)]="form.data.experience">
+                <option [ngValue]="undefined">Select Experience</option>
+                <option value="0-1">0-1</option>
+                <option value="1-2">1-2</option>
+                <option value="2-3">2-3</option>
+                <option value="3-5">3-5</option>
+                <option value="5-7">5-7</option>
+                <option value="7-10">7-10</option>
+              </select>
+              <span *ngIf="form.inputerror?.experience" class="alertRedColor">
+                {{ form.inputerror.experience }}
+              </span>
+            </div>
+
+            <!-- Department -->
+            <div class="form-group pt-2">
+              <label><b>Department</b> <span class="required-field">*</span></label>
+              <input type="text" class="form-control" placeholder="{{ 'Enter Department' | translate }}"
+                name="department" [(ngModel)]="form.data.department">
+              <span *ngIf="form.inputerror?.department" class="alertRedColor">
+                {{ form.inputerror.department }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-2 pb-3 justify-content-center">
+              <button *ngIf="!form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                Save
+              </button>
+
+              <button *ngIf="form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                Update
+              </button>
+
+              <a class="btn btn-warning" [routerLink]="['/joblist']" style="color:white">
+                List
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

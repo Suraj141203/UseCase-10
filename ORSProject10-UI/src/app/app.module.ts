@@ -64,6 +64,10 @@ import { ReportComponent } from './report/report.component';
 import { ReportlistComponent } from './report/reportlist.component';
 import { AddressComponent } from './address/address.component';
 import { AddresslistComponent } from './address/addresslist.component';
+import { InquiryComponent } from './inquiry/inquiry.component';
+import { InquiryListComponent } from './inquiry/inquirylist.component';
+import { JobComponent } from './job/job.component';
+import { JoblistComponent } from './job/joblist.component';
 
 
 
@@ -126,6 +130,10 @@ export function myHttpLoader(http: HttpClient) {
     ReportlistComponent,
     AddressComponent,
     AddresslistComponent,
+    InquiryComponent,
+    InquiryListComponent,
+    JobComponent,
+    JoblistComponent
 
     
   ],

@@ -46,6 +46,10 @@ import { ReportComponent } from './report/report.component';
 import { ReportlistComponent } from './report/reportlist.component';
 import { AddressComponent } from './address/address.component';
 import { AddresslistComponent } from './address/addresslist.component';
+import { InquiryComponent } from './inquiry/inquiry.component';
+import { InquiryListComponent } from './inquiry/inquirylist.component';
+import { JobComponent } from './job/job.component';
+import { JoblistComponent } from './job/joblist.component';
 
 
 const routes: Routes = [
@@ -358,6 +362,31 @@ const routes: Routes = [
 {
   path: 'address/:id',
   component: AddressComponent
+},
+
+ {
+  path: 'inquiry',
+  component: InquiryComponent
+},
+{
+  path: 'inquirylist',
+  component: InquiryListComponent
+},
+{
+  path: 'inquiry/:id',
+  component: InquiryComponent
+},
+{
+  path: 'job',
+  component: JobComponent
+},
+{
+  path: 'joblist',
+  component: JoblistComponent
+},
+{
+  path: 'job/:id',
+  component: JobComponent
 }
 
 
