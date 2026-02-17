@@ -50,6 +50,8 @@ import { InquiryComponent } from './inquiry/inquiry.component';
 import { InquiryListComponent } from './inquiry/inquirylist.component';
 import { JobComponent } from './job/job.component';
 import { JoblistComponent } from './job/joblist.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { ShoppingListComponent } from './shopping/shoppinglist.component';
 
 
 const routes: Routes = [
@@ -387,7 +389,22 @@ const routes: Routes = [
 {
   path: 'job/:id',
   component: JobComponent
+},
+
+{
+  path: 'shopping',
+  component: ShoppingComponent
+},
+{
+  path: 'shoppinglist',
+  component: ShoppingListComponent
+},
+{
+  path: 'shopping/:id',
+  component: ShoppingComponent
 }
+
+
 
 
     

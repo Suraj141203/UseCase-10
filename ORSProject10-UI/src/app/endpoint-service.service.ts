@@ -28,6 +28,7 @@ export class EndpointServiceService {
   public ADDRESS = this.SERVER_URL + "/Address";
   public INQUIRY = this.SERVER_URL + "/Inquiry";
   public JOB = this.SERVER_URL + "/Job";
+  public SHOPPING = this.SERVER_URL + "/Shopping";
 
 
 

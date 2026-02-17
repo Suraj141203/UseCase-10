@@ -68,6 +68,8 @@ import { InquiryComponent } from './inquiry/inquiry.component';
 import { InquiryListComponent } from './inquiry/inquirylist.component';
 import { JobComponent } from './job/job.component';
 import { JoblistComponent } from './job/joblist.component';
+import { ShoppingComponent } from './shopping/shopping.component';
+import { ShoppingListComponent } from './shopping/shoppinglist.component';
 
 
 
@@ -133,7 +135,9 @@ export function myHttpLoader(http: HttpClient) {
     InquiryComponent,
     InquiryListComponent,
     JobComponent,
-    JoblistComponent
+    JoblistComponent,
+    ShoppingComponent,
+    ShoppingListComponent
 
     
   ],

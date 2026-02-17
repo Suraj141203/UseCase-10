@@ -1,0 +1,213 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top: 12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="shoppingForm">
+
+            <h2 *ngIf="!form.data.id"
+                class="text-primary font-weight-bold text-center">
+              {{ 'Add Shopping' | translate }}
+            </h2>
+
+            <h2 *ngIf="form.data.id"
+                class="text-primary font-weight-bold text-center">
+              {{ 'Update Shopping' | translate }}
+            </h2>
+
+            <!-- ERROR MESSAGE -->
+            <div *ngIf="form.error && form.message"
+                 class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div *ngIf="!form.error && form.message"
+                 class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Product Name -->
+            <div class="form-group pt-2">
+              <label>
+                <b>{{ 'Product Name' | translate }}</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-user grey-text"></i>
+                  </div>
+                </div>
+
+                <input type="text"
+                       name="productName"
+                       [(ngModel)]="form.data.productName"
+                       class="form-control"
+                       maxlength="50"
+                       placeholder="{{ 'Enter Product Name' | translate }}">
+              </div>
+
+              <span *ngIf="form.inputerror.productName"
+                    class="alertRedColor">
+                {{ form.inputerror.productName }}
+              </span>
+            </div>
+
+            <!-- Product Price -->
+            <div class="form-group pt-2">
+              <label>
+                <b>{{ 'Product Price' | translate }}</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-money grey-text"></i>
+                  </div>
+                </div>
+
+                <input type="text"
+                       name="productPrice"
+                       [(ngModel)]="form.data.productPrice"
+                       class="form-control"
+                       placeholder="{{ 'Enter Product Price' | translate }}">
+              </div>
+
+              <span *ngIf="form.inputerror.productPrice"
+                    class="alertRedColor">
+                {{ form.inputerror.productPrice }}
+              </span>
+            </div>
+
+            <!-- Shop Name -->
+            <div class="form-group pt-2">
+              <label>
+                <b>{{ 'Shop Name' | translate }}</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-building grey-text"></i>
+                  </div>
+                </div>
+
+                <input type="text"
+                       name="shopName"
+                       [(ngModel)]="form.data.shopName"
+                       class="form-control"
+                       placeholder="{{ 'Enter Shop Name' | translate }}">
+              </div>
+
+              <span *ngIf="form.inputerror.shopName"
+                    class="alertRedColor">
+                {{ form.inputerror.shopName }}
+              </span>
+            </div>
+
+            <!-- Date of Purchase -->
+            <div class="form-group pt-2">
+              <label>
+                <b>{{ 'Purchase Date' | translate }}</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-calendar grey-text"></i>
+                  </div>
+                </div>
+
+                <input type="date"
+                       name="dob"
+                       [value]="form.data.dob | date:'yyyy-MM-dd'"
+                       (input)="form.data.dob=parseDate($event.target.value)"
+                       class="form-control">
+              </div>
+
+              <span *ngIf="form.inputerror.dob"
+                    class="alertRedColor">
+                {{ form.inputerror.dob }}
+              </span>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="row pt-2 pl-2 pb-3">
+
+              <div class="col-md-3"></div>
+
+              <div class="pt-2">
+                <button *ngIf="!form.data.id > 0"
+                        (click)="submit()"
+                        class="btn btn-success mr-2">
+                  {{ 'Save' | translate }}
+                </button>
+              </div>
+
+              <div class="col-md-1"></div>
+
+              <div class="pt-2">
+                <button *ngIf="form.data.id > 0"
+                        (click)="submit()"
+                        class="btn btn-success mr-2">
+                  {{ 'Update' | translate }}
+                </button>
+              </div>
+
+              <div class="pt-2">
+                <a class="btn btn-warning mr-1"
+                   type="button"
+                   [routerLink]="['/shoppinglist']"
+                   style="text-decoration: none; color: white;">
+                  {{ 'List' | translate }}
+                </a>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
