@@ -53,49 +53,46 @@
       <!-- HEADER -->
       <div class="panel-heading">
         <h1 class="text-primary font-weight-bold">
-          {{ 'Shopping List' | translate }}
+          Shopping List
         </h1>
       </div>
 
-      <!-- SEARCH BAR -->
+      <!-- SEARCH SECTION -->
       <div class="row search-inputs p-1 justify-content-center g-3">
 
         <div class="col-sm-2">
-          <input type="text" class="form-control" name="productName" [(ngModel)]="form.searchParams.productName"
+          <input type="text" name="productName" [(ngModel)]="form.searchParams.productName" class="form-control"
             placeholder="Enter Product Name">
         </div>
 
         <div class="col-sm-2">
-          <input type="text" class="form-control" name="productPrice" [(ngModel)]="form.searchParams.productPrice"
+          <input type="text" name="productPrice" [(ngModel)]="form.searchParams.productPrice" class="form-control"
             placeholder="Enter Product Price">
         </div>
 
         <div class="col-sm-2">
-          <input type="text" class="form-control" name="shopName" [(ngModel)]="form.searchParams.shopName"
+          <input type="text" name="shopName" [(ngModel)]="form.searchParams.shopName" class="form-control"
             placeholder="Enter Shop Name">
         </div>
 
         <div class="col-sm-2">
-          <input type="date" class="form-control" name="dob" [(ngModel)]="form.searchParams.dob">
+          <input type="date" name="dob" [(ngModel)]="form.searchParams.dob" class="form-control">
         </div>
 
-        <!-- SEARCH -->
         <div class="col-sm-1">
-          <button type="button" (click)="search()" class="btn btn-primary w-100">
+          <button (click)="search()" class="btn btn-primary w-100">
             Search
           </button>
         </div>
 
-        <!-- ADD -->
         <div>
-          <button type="button" (click)="forward('/shopping')" class="btn btn-success w-100">
+          <button (click)="forward('/shopping')" type="button" class="btn btn-success w-100">
             Add Shopping
           </button>
         </div>
 
-        <!-- DELETE -->
         <div class="col-sm-1">
-          <button type="button" (click)="deleteMany()" class="btn btn-danger w-100">
+          <button (click)="deleteMany()" class="btn btn-danger w-100">
             Delete
           </button>
         </div>
@@ -113,28 +110,33 @@
         {{ form.message }}
       </div>
 
-      <!-- TABLE -->
+      <!-- TABLE SECTION -->
       <div class="table-responsive">
         <table class="table table-bordered table-hover table-dark">
           <thead class="thead-dark text-uppercase">
             <tr align="center">
+
+              <!-- MASTER CHECKBOX -->
               <th>
-                <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)" />
+                <input type="checkbox" [(ngModel)]="isMasterSel" name="list_name" (change)="checkUncheckAll($event)" />
               </th>
+
               <th>S.No</th>
               <th>Product Name</th>
               <th>Product Price</th>
               <th>Shop Name</th>
               <th>Purchase Date</th>
               <th>Edit</th>
+
             </tr>
           </thead>
 
           <tbody>
             <tr *ngFor="let m of form.list; let i = index" align="center">
 
+              <!-- ROW CHECKBOX -->
               <td>
-                <input type="checkbox" [(ngModel)]="m.selected" (change)="checklistUpdate()" />
+                <input type="checkbox" #checkboxes (change)="checklistUpdate()" name="list_name" [id]="m.id" />
               </td>
 
               <td>{{ (form.pageNo * 5) + i + 1 }}</td>
@@ -143,8 +145,9 @@
               <td>{{ m.shopName }}</td>
               <td>{{ m.dob | date:'yyyy-MM-dd' }}</td>
 
+              <!-- EDIT BUTTON -->
               <td>
-                <button id="nnn" class="fa fa-edit text-primary" (click)="forward('/shopping/' + m.id)">
+                <button class="fa fa-edit text-primary" id="nnn" (click)="forward('/shopping/' + m.id)">
                 </button>
               </td>
 
@@ -156,7 +159,7 @@
       <!-- PAGINATION -->
       <div class="d-flex justify-content-between mt-3">
 
-        <button type="button" (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info">
+        <button (click)="previous()" [disabled]="form.pageNo == 0" class="btn btn-info">
           Previous
         </button>
 
@@ -172,7 +175,7 @@
           </a>
         </div>
 
-        <button type="button" (click)="next()" [disabled]="nextList == 0" class="btn btn-info">
+        <button (click)="next()" [disabled]="nextList == 0" class="btn btn-info">
           Next
         </button>
 

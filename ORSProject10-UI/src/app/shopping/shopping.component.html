@@ -35,26 +35,22 @@
 
           <form name="shoppingForm">
 
-            <h2 *ngIf="!form.data.id"
-                class="text-primary font-weight-bold text-center">
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold" style="text-align: center;">
               {{ 'Add Shopping' | translate }}
             </h2>
 
-            <h2 *ngIf="form.data.id"
-                class="text-primary font-weight-bold text-center">
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold" style="text-align: center;">
               {{ 'Update Shopping' | translate }}
             </h2>
 
             <!-- ERROR MESSAGE -->
-            <div *ngIf="form.error && form.message"
-                 class="alert alert-danger alert-dismissible fade show">
+            <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               {{ form.message }}
             </div>
 
             <!-- SUCCESS MESSAGE -->
-            <div *ngIf="!form.error && form.message"
-                 class="alert alert-success alert-dismissible fade show">
+            <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               {{ form.message }}
             </div>
@@ -73,16 +69,11 @@
                   </div>
                 </div>
 
-                <input type="text"
-                       name="productName"
-                       [(ngModel)]="form.data.productName"
-                       class="form-control"
-                       maxlength="50"
-                       placeholder="{{ 'Enter Product Name' | translate }}">
+                <input type="text" name="productName" [(ngModel)]="form.data.productName" class="form-control"
+                  maxlength="50" placeholder="{{ 'Enter Product Name' | translate }}">
               </div>
 
-              <span *ngIf="form.inputerror.productName"
-                    class="alertRedColor">
+              <span *ngIf="form.inputerror.productName" class="alertRedColor">
                 {{ form.inputerror.productName }}
               </span>
             </div>
@@ -101,15 +92,11 @@
                   </div>
                 </div>
 
-                <input type="text"
-                       name="productPrice"
-                       [(ngModel)]="form.data.productPrice"
-                       class="form-control"
-                       placeholder="{{ 'Enter Product Price' | translate }}">
+                <input type="text" name="productPrice" [(ngModel)]="form.data.productPrice" class="form-control"
+                  placeholder="{{ 'Enter Product Price' | translate }}">
               </div>
 
-              <span *ngIf="form.inputerror.productPrice"
-                    class="alertRedColor">
+              <span *ngIf="form.inputerror.productPrice" class="alertRedColor">
                 {{ form.inputerror.productPrice }}
               </span>
             </div>
@@ -128,20 +115,16 @@
                   </div>
                 </div>
 
-                <input type="text"
-                       name="shopName"
-                       [(ngModel)]="form.data.shopName"
-                       class="form-control"
-                       placeholder="{{ 'Enter Shop Name' | translate }}">
+                <input type="text" name="shopName" [(ngModel)]="form.data.shopName" class="form-control"
+                  placeholder="{{ 'Enter Shop Name' | translate }}">
               </div>
 
-              <span *ngIf="form.inputerror.shopName"
-                    class="alertRedColor">
+              <span *ngIf="form.inputerror.shopName" class="alertRedColor">
                 {{ form.inputerror.shopName }}
               </span>
             </div>
 
-            <!-- Date of Purchase -->
+            <!-- Purchase Date -->
             <div class="form-group pt-2">
               <label>
                 <b>{{ 'Purchase Date' | translate }}</b>
@@ -151,19 +134,16 @@
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">
-                    <i class="fa fa-calendar grey-text"></i>
+                    <i class="fas fa-calendar grey-text"></i>
                   </div>
                 </div>
 
-                <input type="date"
-                       name="dob"
-                       [value]="form.data.dob | date:'yyyy-MM-dd'"
-                       (input)="form.data.dob=parseDate($event.target.value)"
-                       class="form-control">
+                <input type="date" name="dob" [value]="form.data.dob | date:'yyyy-MM-dd'"
+                  (input)="form.data.dob=parseDate($event.target.value)" class="form-control form-control-sm"
+                  required />
               </div>
 
-              <span *ngIf="form.inputerror.dob"
-                    class="alertRedColor">
+              <span *ngIf="form.inputerror.dob" class="alertRedColor">
                 {{ form.inputerror.dob }}
               </span>
             </div>
@@ -174,9 +154,7 @@
               <div class="col-md-3"></div>
 
               <div class="pt-2">
-                <button *ngIf="!form.data.id > 0"
-                        (click)="submit()"
-                        class="btn btn-success mr-2">
+                <button *ngIf="!form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
                   {{ 'Save' | translate }}
                 </button>
               </div>
@@ -184,18 +162,14 @@
               <div class="col-md-1"></div>
 
               <div class="pt-2">
-                <button *ngIf="form.data.id > 0"
-                        (click)="submit()"
-                        class="btn btn-success mr-2">
+                <button *ngIf="form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
                   {{ 'Update' | translate }}
                 </button>
               </div>
 
               <div class="pt-2">
-                <a class="btn btn-warning mr-1"
-                   type="button"
-                   [routerLink]="['/shoppinglist']"
-                   style="text-decoration: none; color: white;">
+                <a class="btn btn-warning mr-1" type="button" [routerLink]="['/shoppinglist']"
+                  style="text-decoration: none; color: white;">
                   {{ 'List' | translate }}
                 </a>
               </div>
